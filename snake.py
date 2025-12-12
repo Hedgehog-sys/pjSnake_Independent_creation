@@ -2,24 +2,41 @@ from config import *
 
 class Snake:
     def __init__(self):
-        center = SIZE // 2 // CELL * CELL
-        self.data = [center, center, 0]
+        start_x = SIZE // 2 // CELL * CELL
+        start_y = SIZE // 2 // CELL * CELL
+        self.x = start_x
+        self.y = start_y
+        self.direction = (CELL, 0)
+        self.score = 0
+        self.segments = []
+        for i in range(1, INITIAL_LENGTH):
+            seg_x = start_x - i * CELL
+            seg_y = start_y
+            self.segments.append((seg_x, seg_y))
     
     @property
-    def pos(self): 
-        return (self.data[0], self.data[1])
+    def head(self):
+        return (self.x, self.y)
     
-    @property
-    def score(self): 
-        return self.data[2]
+    def move(self):
+        current_pos = (self.x, self.y)
+        self.segments.insert(0, current_pos)
+        desired_length = INITIAL_LENGTH + self.score // 50
+
+        if len(self.segments) > desired_length:
+            self.segments.pop()
+        dx, dy = self.direction
+        self.x += dx
+        self.y += dy
     
-    def move(self, dx, dy): 
-        self.data[0] += dx
-        self.data[1] += dy
+    def change_direction(self, dx, dy):
+        if (dx, dy) != (-self.direction[0], -self.direction[1]):
+            self.direction = (dx, dy)
     
-    def eat(self): 
-        self.data[2] += 50
+    def eat(self):
+        self.score += 50
     
     def check_collision(self):
-        x, y = self.pos
-        return not (0 <= x < SIZE and 0 <= y < SIZE)
+        wall_collision = not (0 <= self.x < SIZE and 0 <= self.y < SIZE)
+        body_collision = (self.x, self.y) in self.segments
+        return wall_collision or body_collision
