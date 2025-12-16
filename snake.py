@@ -1,4 +1,4 @@
-from config import *
+from config import WINDOW_HEIGHT, WINDOW_WIDTH, CELL
 
 class Snake:
     def __init__(self):

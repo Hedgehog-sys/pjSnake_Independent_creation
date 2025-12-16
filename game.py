@@ -4,8 +4,8 @@ import sys
 import math
 import os
 from config import *
-from snake import *
-from food import *
+from snake import Snake
+from food import Food
 
 class Game:
     def __init__(self):
