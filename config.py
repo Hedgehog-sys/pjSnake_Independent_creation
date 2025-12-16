@@ -1,12 +1,12 @@
-SIZE = 700
-CELL = 50 
-FPS = 20
-INITIAL_LENGTH = 2
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
+CELL = 20
+FPS = 10
 
 COLORS = {
-    "bg": (0, 0, 0),           
-    "snake": (0, 255, 0),
+    "bg": (51, 51, 51),
+    "snake": (255, 255, 255),
     "food": (255, 0, 0),
-    "grid": (30, 30, 30),
-    "score": (100, 255, 100)
+    "grid": (119, 119, 119),
+    "score": (255, 255, 255)
 }
